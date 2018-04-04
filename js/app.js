@@ -54,12 +54,32 @@ restartBtn.addEventListener("click", newDeck);
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+let firstCard = "";
+let secondCard = "";
+let matchedCards = []; //stores the opened and matching cards
 let flippedCards = 0;  //keeps track of how many cards were flipped
 
 // evt.target.nodeName: verifies target is desired element ; flippedCards only allow two selections at a time
-if (evt.target.nodeName === 'LI' && flippedCards < 2) {
   deck.addEventListener('click', function (evt) {
-        evt.target.classList.add("open", "show");
-        flippedCards++;
-    }
-});
+    if (evt.target.nodeName === 'LI' && flippedCards < 2) {
+      evt.target.classList.add("open", "show");
+      flippedCards++;
+    };
+  });
+
+const matched = () => {
+  if(matchedCards[1].type === matchedCards[0].type) {
+      card.classList.add('match');
+    };
+  };
+
+// const matched = () => {
+//   if(matchedCards[1] === matchedCards[0]) {
+//     let cardsOpen = deck.querySelectorAll('.open');
+//
+//     cardsOpen.forEach((card) => {
+//       card.classList.add('match');
+//     });
+//   };
+// };
