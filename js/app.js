@@ -6,6 +6,7 @@ const allCards = ["diamond","diamond","paper-plane-o","paper-plane-o","anchor", 
 const deck = document.querySelector("#deck");
 const restartBtn = document.querySelector("#restart");
 
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -53,3 +54,9 @@ restartBtn.addEventListener("click", newDeck);
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+  deck.addEventListener('click', function (evt) {
+    if (evt.target.nodeName === 'LI') {  // ← verifies target is desired element
+        evt.target.classList.add("open", "show");
+    }
+});
