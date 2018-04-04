@@ -57,7 +57,7 @@ restartBtn.addEventListener("click", newDeck);
 
 let firstCard = "";
 let secondCard = "";
-let matchedCards = []; //stores the opened and matching cards
+let matchCards = []; //stores matching cards NOT SURE if needed
 let flippedCards = 0;  //keeps track of how many cards were flipped
 
 // evt.target.nodeName: verifies target is desired element ; flippedCards only allow two selections at a time
@@ -66,13 +66,24 @@ let flippedCards = 0;  //keeps track of how many cards were flipped
       evt.target.classList.add("open", "show");
       flippedCards++;
     };
+    if(flippedCards === 2){
+      if(matchCards[0] === matchCards[1]){
+            matched();
+        } else {
+            // unmatched(); still need to be created
+            console.log("I don't know");
+        }
+    }
   });
 
 const matched = () => {
-  if(matchedCards[1].type === matchedCards[0].type) {
-      card.classList.add('match');
-    };
+  alert("Yes!");
   };
+// const matched = () => {
+//   if(matchedCards[1].type === matchedCards[0].type) {
+//       card.classList.add('match');
+//     };
+//   };
 
 // const matched = () => {
 //   if(matchedCards[1] === matchedCards[0]) {
