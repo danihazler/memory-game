@@ -59,12 +59,11 @@ let firstCard = "";
 let secondCard = "";
 // let matchCards = []; stores matching cards NOT SURE if needed
 let flippedCards = [];  //keeps track of how many cards were flipped
+let previousTarget = null;
 
 // evt.target.nodeName: verifies target is desired element ; flippedCards only allow two selections at a time
 deck.addEventListener('click', function (evt) {
   if (evt.target.nodeName === 'LI' && flippedCards.length < 2) {
-    // flippedCards++;
-    // if(flippedCards === 1){
     firstCard = evt.target.children[0].classList[1];
     evt.target.classList.add("open", "show");
     flippedCards.push(firstCard);
@@ -78,11 +77,11 @@ deck.addEventListener('click', function (evt) {
     if(flippedCards[1] === flippedCards[0]){
       matched();
     } else {
-      // unmatched(); still need to be created
+      unmatched();
       console.log("I don't know");
     }
   }
-  // }
+ previousTarget = evt.target;
 });  // ---- END of deck.addEventListener
 
 //for when cards are a match
@@ -93,9 +92,20 @@ const matched = () => {
   show.forEach(card => {
     card.classList.add('match');
   });
-
-  // flippedCards = [];
 };
+
+const unmatched = () => {
+  firstCard = '';
+  secondCard = '';
+  flippedCards = [];
+
+  let show = document.querySelectorAll('.show');
+  show.forEach(card => {
+    card.classList.remove("show", "open");
+
+  });
+};
+
 
 
 // const matched = () => {
