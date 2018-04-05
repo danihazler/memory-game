@@ -31,7 +31,7 @@ function shuffle(array) {
 
 function newDeck(){
   let cardsOnBoard = shuffle(allCards);
-  deck.innerHTML = " ";  //clears the deck every time newBoard is called
+  deck.innerHTML = " ";  //clears the deck every time newDeck is called
 
   for(cardIndex = 0; cardIndex < allCards.length; cardIndex++){
     let card = deck.appendChild(document.createElement('li'));
@@ -57,35 +57,46 @@ restartBtn.addEventListener("click", newDeck);
 
 let firstCard = "";
 let secondCard = "";
-let matchCards = []; //stores matching cards NOT SURE if needed
+// let matchCards = []; stores matching cards NOT SURE if needed
 let flippedCards = [];  //keeps track of how many cards were flipped
 
 // evt.target.nodeName: verifies target is desired element ; flippedCards only allow two selections at a time
 deck.addEventListener('click', function (evt) {
-  if (evt.target.nodeName === 'LI' && flippedCards < 2) {
-    flippedCards++;
-    if(flippedCards === 1){
-      firstCard = evt.target.children[0].classList[1];
-      evt.target.classList.add("open", "show");
-    } else {
-      secondCard = evt.target.children[0].classList[1];
-      evt.target.classList.add("open", "show");
-    }
+  if (evt.target.nodeName === 'LI' && flippedCards.length < 2) {
+    // flippedCards++;
+    // if(flippedCards === 1){
+    firstCard = evt.target.children[0].classList[1];
+    evt.target.classList.add("open", "show");
+    flippedCards.push(firstCard);
+  } else {
+    secondCard = evt.target.children[0].classList[1];
+    evt.target.classList.add("open", "show");
+    flippedCards.push(secondCard);
+  }
 
-    if(flippedCards === 2){
-      if(firstCard === secondCard){
-        matched();
-      } else {
-        // unmatched(); still need to be created
-        console.log("I don't know");
-      }
+  if(flippedCards.length === 2){
+    if(flippedCards[1] === flippedCards[0]){
+      matched();
+    } else {
+      // unmatched(); still need to be created
+      console.log("I don't know");
     }
   }
+  // }
 });  // ---- END of deck.addEventListener
 
+//for when cards are a match
 const matched = () => {
   console.log("those are a match");
+
+  let show = document.querySelectorAll('.show');
+  show.forEach(card => {
+    card.classList.add('match');
+  });
+
+  // flippedCards = [];
 };
+
 
 // const matched = () => {
 //   if(matchedCards[1].type === matchedCards[0].type) {
