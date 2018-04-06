@@ -6,6 +6,8 @@ const allCards = ["diamond","diamond","paper-plane-o","paper-plane-o","anchor", 
 const deck = document.querySelector("#deck");
 const restartBtn = document.querySelector("#restart");
 const movesCounter = document.querySelector(".moves");
+const scorePanel = document.querySelector(".stars");
+const stars = scorePanel.querySelectorAll("li");
 
 /*
 * Display the cards on the page
@@ -111,10 +113,16 @@ const unmatched = () => {
   },500);
 };
 
-// ---- Couting moves function ----
+// ---- Moves Counter function & Stars Rating based on moves ----
 //
 let moves = 0;
 function moveCounter(){
   moves++;
   movesCounter.innerHTML = moves;
+
+  if (moves === 10) {
+      scorePanel.lastElementChild.style.visibility = 'hidden';
+  } else if (moves === 20) {
+      scorePanel.lastElementChild.previousElementSibling.style.visibility = 'hidden';
+  }
 }
