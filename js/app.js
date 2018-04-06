@@ -9,6 +9,8 @@ const movesCounter = document.querySelector(".moves");
 const scorePanel = document.querySelector(".stars");
 const stars = scorePanel.querySelectorAll("li");
 
+let moves = 0;
+
 /*
 * Display the cards on the page
 *   - shuffle the list of cards using the provided "shuffle" method below
@@ -34,7 +36,10 @@ function shuffle(array) {
 // ---- Creates a new deck of shuffled cards
 function newDeck(){
   let cardsOnBoard = shuffle(allCards);
-  deck.innerHTML = " ";  //clears the deck every time newDeck is called
+  //clears the deck and moves every time newDeck is called
+  deck.innerHTML = " ";
+  moves = 0;
+  movesCounter.innerHTML = moves;
 
   for(cardIndex = 0; cardIndex < allCards.length; cardIndex++){
     let card = deck.appendChild(document.createElement('li'));
@@ -115,7 +120,6 @@ const unmatched = () => {
 
 // ---- Moves Counter function & Stars Rating based on moves ----
 //
-let moves = 0;
 function moveCounter(){
   moves++;
   movesCounter.innerHTML = moves;
