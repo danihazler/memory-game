@@ -8,8 +8,12 @@ const restartBtn = document.querySelector("#restart");
 const movesCounter = document.querySelector(".moves");
 const scorePanel = document.querySelector(".stars");
 const stars = scorePanel.querySelectorAll("li");
+const timer = document.querySelector(".timer");
 
 let moves = 0;
+let sec = 0;
+let min = 0;
+let interval;
 
 /*
 * Display the cards on the page
@@ -76,6 +80,7 @@ let previousTarget = null; //to avoid that the same card is clicked 2x
 // evt.target.nodeName: verifies target is desired element ; flippedCards only allow two selections at a time
 deck.addEventListener('click', function (evt) {
   if (evt.target.nodeName === 'LI' && flippedCards.length < 2) {
+    timeCounter();
     firstCard = evt.target.children[0].classList[1];
     evt.target.classList.add("open", "show");
     flippedCards.push(firstCard);
@@ -121,8 +126,8 @@ const unmatched = () => {
   },500);
 };
 
-// ---- Moves Counter function & Stars Rating based on moves ----
-//
+// ---- Moves Counter function
+// & Stars Rating based on moves ----
 function moveCounter(){
   moves++;
   movesCounter.innerHTML = moves;
@@ -132,4 +137,15 @@ function moveCounter(){
   } else if (moves === 20) {
       scorePanel.lastElementChild.previousElementSibling.style.visibility = 'hidden';
   }
+}
+
+// ---- Time counter ----
+//
+function timeCounter(){
+	timer.innerHTML = "Time "+min + ":" +sec;
+	sec++;
+	if (sec === 60) {
+		min++;
+		sec = 0;
+	}
 }
