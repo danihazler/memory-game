@@ -6,7 +6,6 @@ const allCards = ["diamond","diamond","paper-plane-o","paper-plane-o","anchor", 
 const deck = document.querySelector("#deck");
 const restartBtn = document.querySelector("#restart");
 
-
 /*
 * Display the cards on the page
 *   - shuffle the list of cards using the provided "shuffle" method below
@@ -29,6 +28,7 @@ function shuffle(array) {
   return array;
 }
 
+// ---- Creates a new deck of shuffled cards
 function newDeck(){
   let cardsOnBoard = shuffle(allCards);
   deck.innerHTML = " ";  //clears the deck every time newDeck is called
@@ -41,7 +41,8 @@ function newDeck(){
 }
 
 window.onload = newDeck();
-
+//
+// ---- Restart button ----
 restartBtn.addEventListener("click", newDeck);
 
 /*
@@ -57,9 +58,9 @@ restartBtn.addEventListener("click", newDeck);
 
 let firstCard = "";
 let secondCard = "";
-// let matchCards = []; stores matching cards NOT SURE if needed
-let flippedCards = [];  //keeps track of how many cards were flipped
-let previousTarget = null;
+let matchCards = []; // stores matched cards
+let flippedCards = [];  // keeps track of how many cards were flipped
+let previousTarget = null; //to avoid that the same card is clicked 2x
 
 // evt.target.nodeName: verifies target is desired element ; flippedCards only allow two selections at a time
 deck.addEventListener('click', function (evt) {
@@ -67,59 +68,43 @@ deck.addEventListener('click', function (evt) {
     firstCard = evt.target.children[0].classList[1];
     evt.target.classList.add("open", "show");
     flippedCards.push(firstCard);
-  } else {
-    secondCard = evt.target.children[0].classList[1];
-    evt.target.classList.add("open", "show");
-    flippedCards.push(secondCard);
-  }
 
-  if(flippedCards.length === 2){
-    if(flippedCards[1] === flippedCards[0]){
-      matched();
-    } else {
-      unmatched();
-      console.log("I don't know");
+    if(flippedCards.length === 2){
+      if(flippedCards[0] === flippedCards[1]){
+        matchCards.push(flippedCards[0], flippedCards[1])
+        matched();
+      } else {
+        unmatched();
+      }
     }
   }
- previousTarget = evt.target;
-});  // ---- END of deck.addEventListener
+  previousTarget = evt.target;
+});
+// ---- END of deck.addEventListener
 
-//for when cards are a match
+// ----  when cards are a match ----
+//
 const matched = () => {
-  console.log("those are a match");
-
+  flippedCards = [];
   let show = document.querySelectorAll('.show');
+
   show.forEach(card => {
     card.classList.add('match');
   });
 };
 
+// ---- when cards are an unmatch ----
+//
 const unmatched = () => {
+  console.log("there's no match", flippedCards);
   firstCard = '';
   secondCard = '';
   flippedCards = [];
-
-  let show = document.querySelectorAll('.show');
-  show.forEach(card => {
-    card.classList.remove("show", "open");
-
-  });
+// ---- sets a delay to turn card back in the original position
+  setTimeout(function(){
+    const selectElem = document.querySelectorAll('.show')
+    for (var i=0; i<selectElem.length; i++) {
+      selectElem[i].classList.remove('show', 'open');
+    }
+  },500);
 };
-
-
-
-// const matched = () => {
-//   if(matchedCards[1].type === matchedCards[0].type) {
-//       card.classList.add('match');
-//     };
-//   };
-
-// const matched = () => {
-//   if(matchedCards[1] === matchedCards[0]) {
-//     let cardsOpen = deck.querySelectorAll('.open');
-//
-//     cardsOpen.forEach((card) => {
-//       card.classList.add('match');
-//     });
-//   };
-// };
