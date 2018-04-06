@@ -36,10 +36,13 @@ function shuffle(array) {
 // ---- Creates a new deck of shuffled cards
 function newDeck(){
   let cardsOnBoard = shuffle(allCards);
-  //clears the deck and moves every time newDeck is called
+  //clears the deck, moves and stars every time newDeck is called
   deck.innerHTML = " ";
   moves = 0;
   movesCounter.innerHTML = moves;
+  for (star of stars) {
+      star.style.visibility = 'visible';
+  }
 
   for(cardIndex = 0; cardIndex < allCards.length; cardIndex++){
     let card = deck.appendChild(document.createElement('li'));
