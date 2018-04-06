@@ -111,3 +111,13 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/*
+* Congratulations Modal
+*/
+.congrats-modal {
+  width: 40%;
+  height: auto;
+  background: yellowgreen;
+  position: absolute;
+}

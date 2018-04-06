@@ -158,3 +158,35 @@ function resetTimer(){
 	clearInterval(interval);
 	timer.innerHTML = "Time 0:0";
 }
+
+// Congratulations modal when all cards match, show all details
+//
+function congrats(){
+    if (matchCard.length === 16){
+        clearInterval(interval);
+        finalTime = timer.innerHTML;
+
+        // show congratulations modal
+        modal.classList.add("show");
+
+        // declare star rating variable
+        var starRating = document.querySelector(".stars").innerHTML;
+
+        //showing move, rating, time on modal
+        document.getElementById("finalMove").innerHTML = moves;
+        document.getElementById("starRating").innerHTML = starRating;
+        document.getElementById("totalTime").innerHTML = finalTime;
+
+        // icon to close
+        closeModal();
+    };
+}
+
+
+// @description close icon on modal
+function closeModal(){
+    closeicon.addEventListener("click", function(e){
+        modal.classList.remove("show");
+        startGame();
+    });
+}
