@@ -5,6 +5,7 @@ const allCards = ["diamond","diamond","paper-plane-o","paper-plane-o","anchor", 
 
 const deck = document.querySelector("#deck");
 const restartBtn = document.querySelector("#restart");
+const movesCounter = document.querySelector(".moves");
 
 /*
 * Display the cards on the page
@@ -70,15 +71,16 @@ deck.addEventListener('click', function (evt) {
     flippedCards.push(firstCard);
 
     if(flippedCards.length === 2){
+      moveCounter();
       if(flippedCards[0] === flippedCards[1]){
         matchCards.push(flippedCards[0], flippedCards[1])
         matched();
+        previousTarget = evt.target;
       } else {
         unmatched();
       }
     }
   }
-  previousTarget = evt.target;
 });
 // ---- END of deck.addEventListener
 
@@ -108,3 +110,11 @@ const unmatched = () => {
     }
   },500);
 };
+
+// ---- Couting moves function ----
+//
+let moves = 0;
+function moveCounter(){
+  moves++;
+  movesCounter.innerHTML = moves;
+}
