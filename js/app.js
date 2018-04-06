@@ -40,13 +40,14 @@ function shuffle(array) {
 // ---- Creates a new deck of shuffled cards
 function newDeck(){
   let cardsOnBoard = shuffle(allCards);
-  //clears the deck, moves and stars every time newDeck is called
+  //clears the deck, moves, stars and timer every time newDeck is called
   deck.innerHTML = " ";
   moves = 0;
   movesCounter.innerHTML = moves;
   for (star of stars) {
       star.style.visibility = 'visible';
   }
+  resetTimer();
 
   for(cardIndex = 0; cardIndex < allCards.length; cardIndex++){
     let card = deck.appendChild(document.createElement('li'));
@@ -148,4 +149,12 @@ function timeCounter(){
 		min++;
 		sec = 0;
 	}
+}
+// ---- Restart time counter ----
+//
+function resetTimer(){
+	sec = 0;
+  min = 0;
+	clearInterval(interval);
+	timer.innerHTML = "Time 0:0";
 }
