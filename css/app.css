@@ -116,8 +116,32 @@ h1 {
 * Congratulations Modal
 */
 .congrats-modal {
+  background: #ffd900;
+  border-radius: 15px;
   width: 40%;
   height: auto;
-  background: yellowgreen;
+  padding: 2%;
   position: absolute;
+}
+
+.congrats-modal h2 {
+  text-align: center;
+}
+
+.congrats-modal .close {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.7em;
+  position: absolute;
+  top: 5%;
+}
+
+.congrats-modal #play-again {
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 15px;
+  border: none;
+  display: block;
+  margin: 0 auto;
+  padding: .6em 5em;
 }
