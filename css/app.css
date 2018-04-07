@@ -118,30 +118,43 @@ h1 {
 .congrats-modal {
   background: #ffd900;
   border-radius: 15px;
-  width: 40%;
+  width: 50%;
   height: auto;
   padding: 2%;
   position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 500ms;
 }
 
 .congrats-modal h2 {
+  font-size: 2em;
   text-align: center;
 }
 
-.congrats-modal .close {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.7em;
-  position: absolute;
-  top: 5%;
+.congrats-modal .content {
+  padding-bottom: 30px;
 }
 
-.congrats-modal #play-again {
+.congrats-modal li {
+  display: inline-block;
+}
+
+.congrats-modal .close-modal {
   font-family: inherit;
+  color: #2fc52f;
+  background: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  text-align: center;
   cursor: pointer;
-  border-radius: 15px;
-  border: none;
   display: block;
   margin: 0 auto;
-  padding: .6em 5em;
+  padding: .5em;
+  width: 50%;
+}
+
+.show-modal {
+  visibility: visible;
+  opacity: 1;
 }

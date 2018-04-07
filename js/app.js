@@ -9,6 +9,8 @@ const movesCounter = document.querySelector(".moves");
 const scorePanel = document.querySelector(".stars");
 const stars = scorePanel.querySelectorAll("li");
 const timer = document.querySelector(".timer");
+const congratsModal = document.querySelector(".congrats-modal");
+const closeCongrats = document.querySelector(".close-modal");
 
 let moves = 0;
 let sec = 0;
@@ -54,7 +56,8 @@ function newDeck(){
     card.classList.add('card');
     card.innerHTML += '<i class="fa fa-'+ allCards[cardIndex] +'"></i>';
   }
-}
+  // closeModal();
+};
 
 window.onload = newDeck();
 //
@@ -97,6 +100,7 @@ deck.addEventListener('click', function (evt) {
       }
     }
   }
+  congrats();
 });
 // ---- END of deck.addEventListener
 
@@ -143,7 +147,7 @@ function moveCounter(){
 // ---- Time counter ----
 //
 function timeCounter(){
-	timer.innerHTML = "Time "+min + ":" +sec;
+	timer.innerHTML = "Time "+ min + ":" + sec;
 	sec++;
 	if (sec === 60) {
 		min++;
@@ -162,31 +166,32 @@ function resetTimer(){
 // Congratulations modal when all cards match, show all details
 //
 function congrats(){
-    if (matchCard.length === 16){
+    if (matchCards.length === 16){
         clearInterval(interval);
         finalTime = timer.innerHTML;
 
-        // show congratulations modal
-        modal.classList.add("show");
+        // shows modal
+        congratsModal.classList.add("show-modal");
 
-        // declare star rating variable
-        var starRating = document.querySelector(".stars").innerHTML;
+        // declare star rating
+        let starRating = document.querySelector(".stars").innerHTML;
 
-        //showing move, rating, time on modal
+        //display move, rating, time on modal
         document.getElementById("finalMove").innerHTML = moves;
         document.getElementById("starRating").innerHTML = starRating;
         document.getElementById("totalTime").innerHTML = finalTime;
 
-        // icon to close
+        // Play again
         closeModal();
     };
 }
 
-
-// @description close icon on modal
+// ---- Close modal ----
+//
 function closeModal(){
-    closeicon.addEventListener("click", function(e){
-        modal.classList.remove("show");
-        startGame();
+    closeCongrats.addEventListener("click", function(evt){
+        congratsModal.classList.remove("show-modal");
+        newDeck();
+        matchCards = [];
     });
 }
