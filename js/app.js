@@ -3,7 +3,12 @@
 */
 const allCards = ["diamond","diamond","paper-plane-o","paper-plane-o","anchor", "anchor","bolt","bolt","cube","cube","leaf","leaf","bicycle","bicycle","bomb","bomb"];
 
+
+let cardGame;
+let allCardsGame;
+
 const deck = document.querySelector("#deck");
+let cardLi = 0;
 const restartBtn = document.querySelector("#restart");
 const movesCounter = document.querySelector(".moves");
 const scorePanel = document.querySelector(".stars");
@@ -58,7 +63,11 @@ function newDeck(){
     card.classList.add('card');
     card.innerHTML += '<i class="fa fa-'+ allCards[cardIndex] +'"></i>';
   }
-  // closeModal();
+
+  cardLi = document.querySelector("#deck").getElementsByTagName("li").length;
+  cardGame = document.getElementsByClassName("card");
+  allCardsGame = [...cardGame]
+  console.log(allCardsGame)
 };
 
 window.onload = newDeck();
@@ -87,7 +96,7 @@ let previousTarget = null; //to avoid that the same card is clicked 2x
 deck.addEventListener('click', function (evt) {
   if (evt.target.nodeName === 'LI' && flippedCards.length < 2) {
     firstCard = evt.target.children[0].classList[1];
-    evt.target.classList.add("open", "show");
+    evt.target.classList.add("open", "show", "disabled");
     flippedCards.push(firstCard);
 
     if(flippedCards.length === 2){
@@ -111,7 +120,7 @@ const matched = () => {
   let show = document.querySelectorAll('.show');
 
   show.forEach(card => {
-    card.classList.add('match');
+    card.classList.add('match', "disabled");
   });
 };
 
@@ -122,12 +131,30 @@ const unmatched = () => {
   flippedCards = [];
 // ---- sets a delay to turn card back in the original position
   setTimeout(function(){
-    const selectElem = document.querySelectorAll('.show')
+    const selectElem = document.querySelectorAll('.show');
     for (var i=0; i<selectElem.length; i++) {
-      selectElem[i].classList.remove('show', 'open');
+      enable();
+      selectElem[i].classList.remove('show', 'open', 'disabled');
     }
   },500);
 };
+
+function disable(){
+    Array.prototype.filter.call(allCardsGame, function(card){
+        card.classList.add('disabled');
+    });
+}
+
+function enable(){
+    Array.prototype.filter.call(allCardsGame, function(card){
+        // card.classList.remove('disabled');
+        console.log(card);
+        for(var i = 0; i < matchCards.length; i++){
+            console.log("matchcards", matchCards)
+            document.getElementsByClassName("match")[i].classList.add("disabled");
+        }
+    });
+}
 
 // ---- Moves Counter function & Stars Rating based on moves ----
 function moveCounter(){
@@ -183,13 +210,13 @@ function congrats(){
         clearInterval(interval);
         finalTime = timer.innerHTML;
 
-        // shows modal
+        // Shows modal
         congratsModal.classList.add("show-modal");
 
-        // declare star rating
+        // eclare star rating
         let starRating = document.querySelector(".stars").innerHTML;
 
-        //display move, rating, time on modal
+        //Display move, rating, time on modal
         document.getElementById("finalMove").innerHTML = moves;
         document.getElementById("starRating").innerHTML = starRating;
         document.getElementById("totalTime").innerHTML = finalTime;
@@ -207,3 +234,5 @@ function closeModal(){
         matchCards = [];
     });
 }
+
+console.log(deck)
