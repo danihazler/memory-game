@@ -11,6 +11,8 @@ const stars = scorePanel.querySelectorAll("li");
 const timer = document.querySelector(".timer");
 const congratsModal = document.querySelector(".congrats-modal");
 const closeCongrats = document.querySelector(".close-modal");
+const minutes = document.querySelector("#minutes");
+const seconds = document.querySelector("#seconds");
 
 let moves = 0;
 let sec = 0;
@@ -60,7 +62,7 @@ function newDeck(){
 };
 
 window.onload = newDeck();
-//
+
 // ---- Restart button ----
 restartBtn.addEventListener("click", newDeck);
 
@@ -84,7 +86,6 @@ let previousTarget = null; //to avoid that the same card is clicked 2x
 // evt.target.nodeName: verifies target is desired element ; flippedCards only allow two selections at a time
 deck.addEventListener('click', function (evt) {
   if (evt.target.nodeName === 'LI' && flippedCards.length < 2) {
-    timeCounter();
     firstCard = evt.target.children[0].classList[1];
     evt.target.classList.add("open", "show");
     flippedCards.push(firstCard);
@@ -105,7 +106,6 @@ deck.addEventListener('click', function (evt) {
 // ---- END of deck.addEventListener
 
 // ----  when cards are a match ----
-//
 const matched = () => {
   flippedCards = [];
   let show = document.querySelectorAll('.show');
@@ -116,9 +116,7 @@ const matched = () => {
 };
 
 // ---- when cards are an unmatch ----
-//
 const unmatched = () => {
-  console.log("there's no match", flippedCards);
   firstCard = '';
   secondCard = '';
   flippedCards = [];
@@ -131,11 +129,14 @@ const unmatched = () => {
   },500);
 };
 
-// ---- Moves Counter function
-// & Stars Rating based on moves ----
+// ---- Moves Counter function & Stars Rating based on moves ----
 function moveCounter(){
   moves++;
   movesCounter.innerHTML = moves;
+
+  if(moves === 1) {
+    timeCounter();
+  }
 
   if (moves === 10) {
       scorePanel.lastElementChild.style.visibility = 'hidden';
@@ -145,26 +146,38 @@ function moveCounter(){
 }
 
 // ---- Time counter ----
-//
 function timeCounter(){
-	timer.innerHTML = "Time "+ min + ":" + sec;
-	sec++;
-	if (sec === 60) {
-		min++;
-		sec = 0;
-	}
+  interval = setInterval(function(){
+    sec++;
+    seconds.innerHTML = sec;
+
+  	if (sec <= 9) {
+      seconds.innerHTML = "0" + sec;
+    }
+    if (sec === 59){
+  		min++;
+  		sec = 0;
+      minutes.innerHTML = min;
+
+      if (min <= 9) {
+        minutes.innerHTML = "0" + min;
+      } else if (min > 9) {
+        minutes.innerHTML = min;
+      }
+  	}
+  },1000);
 }
+
 // ---- Restart time counter ----
-//
 function resetTimer(){
 	sec = 0;
   min = 0;
-	clearInterval(interval);
-	timer.innerHTML = "Time 0:0";
+	clearTimeout(interval);
+  seconds.innerHTML = "00";
+  minutes.innerHTML = "00";
 }
 
 // Congratulations modal when all cards match, show all details
-//
 function congrats(){
     if (matchCards.length === 16){
         clearInterval(interval);
@@ -187,7 +200,6 @@ function congrats(){
 }
 
 // ---- Close modal ----
-//
 function closeModal(){
     closeCongrats.addEventListener("click", function(evt){
         congratsModal.classList.remove("show-modal");
