@@ -1,0 +1,59 @@
+@media (max-width: 980px) {
+  #deck {
+  width: 70%;
+  min-height: 600px;
+  }
+
+  .congrats-modal {
+    top: 21%;
+    width: 30%;
+  }
+
+  .congrats-modal h2 {
+    font-size: 1.5rem;
+  }
+
+  .congrats-modal p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 720px) {
+  #deck {
+    min-height: 500px;
+  }
+
+  #deck .card {
+    height: 100px;
+  }
+}
+
+@media (max-width: 540px) {
+  #deck {
+    min-height: 400px;
+  }
+
+  #deck .card {
+    height: 80px;
+  }
+
+  .congrats-modal {
+    top: 15%;
+  }
+
+  .congrats-modal .close-modal {
+    width: 75%;
+  }
+}
+
+@media (max-width: 465px) {
+  .score-panel {
+    font-size: 0.8rem;
+    width: 80%;
+  }
+
+  .congrats-modal {
+    width: 65%;
+    top: 19%;
+  }
+}
