@@ -17,12 +17,12 @@ The game ends once all cards have been correctly matched.
 
 To play --->  https://codepen.io/danihazler/full/QmzVMZ/
 
-##Support
+## Support
 
 The game has been tested in the following browsers:
 
-Chrome -  65.0.3
-Firefox - 59.0.2
+Chrome -  65.0.3 /
+Firefox - 59.0.2 /
 Safari - 11.1
 
 ## Contributing
