@@ -113,7 +113,8 @@ const matched = () => {
   let show = document.querySelectorAll(".show");
 
   show.forEach(card => {
-    card.classList.add('match', "disabled");
+    card.classList.add("match", "disabled");
+    card.classList.remove("open");
   });
 };
 
@@ -121,7 +122,7 @@ const matched = () => {
 const unmatched = () => {
   cardSelected = '';
   flippedCards = [];
-  
+
   // ---- sets a delay to turn card back in the original position
   setTimeout(function(){
     const selectElem = document.querySelectorAll(".show");
