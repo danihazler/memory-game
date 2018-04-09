@@ -1,5 +1,9 @@
 # Memory Game Project
 
+Udacity FEND Nanodegree Project III.
+
+A memory game using HTML, CSS, and JavaScript.
+
 ## Table of Contents
 
 * [Instructions](#instructions)
@@ -7,11 +11,19 @@
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+The gameplay rules are very simple: flip over (with a click) two hidden cards at a time to locate the ones that match!
 
-To get started, open `js/app.js` and start building out the app's functionality
+The game ends once all cards have been correctly matched.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+To play --->  https://codepen.io/danihazler/full/QmzVMZ/
+
+##Support
+
+The game has been tested in the following browsers:
+
+Chrome -  65.0.3
+Firefox - 59.0.2
+Safari - 11.1
 
 ## Contributing
 
