@@ -52,7 +52,7 @@ function newDeck(){
   moves = 0;
   movesCounter.innerHTML = moves;
   for (star of stars) {
-      star.style.visibility = 'visible';
+    star.style.visibility = 'visible';
   }
   resetTimer();
 
@@ -61,10 +61,9 @@ function newDeck(){
     card.classList.add('card');
     card.innerHTML += '<i class="fa fa-'+ allCards[cardIndex] +'"></i>';
   }
-
   //transforms an HTML colletion in an array
   cardGame = document.getElementsByClassName("card");
-  allCardsGame = [...cardGame]
+  allCardsGame = [...cardGame];
 };
 
 window.onload = newDeck();
@@ -87,13 +86,13 @@ let firstCard = "";
 let secondCard = "";
 let matchCards = []; // stores matched cards
 let flippedCards = [];  // keeps track of how many cards were flipped
-let previousTarget = null; //to avoid that the same card is clicked 2x
 
 // evt.target.nodeName: verifies target is desired element ; flippedCards only allow two selections at a time
 deck.addEventListener('click', function (evt) {
-  if (evt.target.nodeName === 'LI' && flippedCards.length < 2) {
-    firstCard = evt.target.children[0].classList[1];
-    evt.target.classList.add("open", "show", "disabled");
+  const cardTarget = evt.target;
+  if (cardTarget.nodeName === 'LI' && flippedCards.length < 2) {
+    firstCard = cardTarget.children[0].classList[1];
+    cardTarget.classList.add("open", "show", "disabled");
     flippedCards.push(firstCard);
 
     if(flippedCards.length === 2){
@@ -101,7 +100,6 @@ deck.addEventListener('click', function (evt) {
       if(flippedCards[0] === flippedCards[1]){
         matchCards.push(flippedCards[0], flippedCards[1])
         matched();
-        previousTarget = evt.target;
       } else {
         unmatched();
       }
@@ -114,7 +112,7 @@ deck.addEventListener('click', function (evt) {
 // ----  when cards are a match ----
 const matched = () => {
   flippedCards = [];
-  let show = document.querySelectorAll('.show');
+  let show = document.querySelectorAll(".show");
 
   show.forEach(card => {
     card.classList.add('match', "disabled");
@@ -126,9 +124,9 @@ const unmatched = () => {
   firstCard = '';
   secondCard = '';
   flippedCards = [];
-// ---- sets a delay to turn card back in the original position
+  // ---- sets a delay to turn card back in the original position
   setTimeout(function(){
-    const selectElem = document.querySelectorAll('.show');
+    const selectElem = document.querySelectorAll(".show");
     for (var i=0; i < selectElem.length; i++) {
       enable();
       selectElem[i].classList.remove('show', 'open', 'disabled');
@@ -136,19 +134,19 @@ const unmatched = () => {
   },500);
 };
 
+// ---- disable a second click in a card already selected
 function disable(){
-    Array.prototype.filter.call(allCardsGame, function(card) {
-        card.classList.add('disabled');
-    });
+  [].filter.call(allCardsGame, function(card) {
+    card.classList.add('disabled');
+  });
 }
 
 function enable(){
-    Array.prototype.filter.call(allCardsGame, function(card) {
-        for(var i = 0; i < matchCards.length; i++){
-            console.log("matchcards", matchCards)
-            document.getElementsByClassName("match")[i].classList.add("disabled");
-        }
-    });
+  [].filter.call(allCardsGame, function(card) {
+    for(var i = 0; i < matchCards.length; i++){
+      document.getElementsByClassName("match")[i].classList.add("disabled");
+    }
+  });
 }
 
 // ---- Moves Counter function & Stars Rating based on moves ----
@@ -161,9 +159,9 @@ function moveCounter(){
   }
 
   if (moves === 10) {
-      scorePanel.lastElementChild.style.visibility = 'hidden';
+    scorePanel.lastElementChild.style.visibility = 'hidden';
   } else if (moves === 20) {
-      scorePanel.lastElementChild.previousElementSibling.style.visibility = 'hidden';
+    scorePanel.lastElementChild.previousElementSibling.style.visibility = 'hidden';
   }
 }
 
@@ -173,12 +171,12 @@ function timeCounter(){
     sec++;
     seconds.innerHTML = sec;
 
-  	if (sec <= 9) {
+    if (sec <= 9) {
       seconds.innerHTML = "0" + sec;
     }
     if (sec === 59){
-  		min++;
-  		sec = 0;
+      min++;
+      sec = 0;
       minutes.innerHTML = min;
 
       if (min <= 9) {
@@ -186,48 +184,46 @@ function timeCounter(){
       } else if (min > 9) {
         minutes.innerHTML = min;
       }
-  	}
+    }
   },1000);
 }
 
 // ---- Restart time counter ----
 function resetTimer(){
-	sec = 0;
+  sec = 0;
   min = 0;
-	clearTimeout(interval);
+  clearTimeout(interval);
   seconds.innerHTML = "00";
   minutes.innerHTML = "00";
 }
 
 // Congratulations modal when all cards match, show all details
 function congrats(){
-    if (matchCards.length === 16){
-        clearInterval(interval);
-        finalTime = timer.innerHTML;
+  if (matchCards.length === 16){
+    clearInterval(interval);
+    finalTime = timer.innerHTML;
 
-        // Shows modal
-        congratsModal.classList.add("show-modal");
+    // Shows modal
+    congratsModal.classList.add("show-modal");
 
-        // eclare star rating
-        let starRating = document.querySelector(".stars").innerHTML;
+    // Declare star rating
+    let starRating = document.querySelector(".stars").innerHTML;
 
-        //Display move, rating, time on modal
-        document.getElementById("finalMove").innerHTML = moves;
-        document.getElementById("starRating").innerHTML = starRating;
-        document.getElementById("totalTime").innerHTML = finalTime;
+    //Display move, rating, time on modal
+    document.getElementById("finalMove").innerHTML = moves;
+    document.getElementById("starRating").innerHTML = starRating;
+    document.getElementById("totalTime").innerHTML = finalTime;
 
-        // Play again
-        closeModal();
-    };
+    // Play again
+    closeModal();
+  };
 }
 
 // ---- Close modal ----
 function closeModal(){
-    closeCongrats.addEventListener("click", function(evt){
-        congratsModal.classList.remove("show-modal");
-        newDeck();
-        matchCards = [];
-    });
+  closeCongrats.addEventListener("click", function(evt){
+    congratsModal.classList.remove("show-modal");
+    newDeck();
+    matchCards = [];
+  });
 }
-
-console.log(deck)
