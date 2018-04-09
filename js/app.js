@@ -3,7 +3,6 @@
 */
 const allCards = ["diamond","diamond","paper-plane-o","paper-plane-o","anchor", "anchor","bolt","bolt","cube","cube","leaf","leaf","bicycle","bicycle","bomb","bomb"];
 
-
 let cardGame;
 let allCardsGame;
 
@@ -82,8 +81,7 @@ restartBtn.addEventListener("click", newDeck);
 *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 */
 
-let firstCard = "";
-let secondCard = "";
+let cardSelected = "";
 let matchCards = []; // stores matched cards
 let flippedCards = [];  // keeps track of how many cards were flipped
 
@@ -91,9 +89,9 @@ let flippedCards = [];  // keeps track of how many cards were flipped
 deck.addEventListener('click', function (evt) {
   const cardTarget = evt.target;
   if (cardTarget.nodeName === 'LI' && flippedCards.length < 2) {
-    firstCard = cardTarget.children[0].classList[1];
+    cardSelected = cardTarget.children[0].classList[1];
     cardTarget.classList.add("open", "show", "disabled");
-    flippedCards.push(firstCard);
+    flippedCards.push(cardSelected);
 
     if(flippedCards.length === 2){
       moveCounter();
@@ -121,9 +119,9 @@ const matched = () => {
 
 // ---- when cards are an unmatch ----
 const unmatched = () => {
-  firstCard = '';
-  secondCard = '';
+  cardSelected = '';
   flippedCards = [];
+  
   // ---- sets a delay to turn card back in the original position
   setTimeout(function(){
     const selectElem = document.querySelectorAll(".show");
