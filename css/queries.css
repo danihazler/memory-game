@@ -52,6 +52,10 @@
     width: 80%;
   }
 
+  .score-panel .timer {
+    padding-left: 7%;
+  }
+
   .congrats-modal {
     width: 65%;
     top: 19%;
