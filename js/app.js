@@ -8,7 +8,6 @@ let cardGame;
 let allCardsGame;
 
 const deck = document.querySelector("#deck");
-let cardLi = 0;
 const restartBtn = document.querySelector("#restart");
 const movesCounter = document.querySelector(".moves");
 const scorePanel = document.querySelector(".stars");
@@ -23,7 +22,6 @@ let moves = 0;
 let sec = 0;
 let min = 0;
 let interval;
-
 /*
 * Display the cards on the page
 *   - shuffle the list of cards using the provided "shuffle" method below
@@ -64,10 +62,9 @@ function newDeck(){
     card.innerHTML += '<i class="fa fa-'+ allCards[cardIndex] +'"></i>';
   }
 
-  cardLi = document.querySelector("#deck").getElementsByTagName("li").length;
+  //transforms an HTML colletion in an array
   cardGame = document.getElementsByClassName("card");
   allCardsGame = [...cardGame]
-  console.log(allCardsGame)
 };
 
 window.onload = newDeck();
@@ -132,7 +129,7 @@ const unmatched = () => {
 // ---- sets a delay to turn card back in the original position
   setTimeout(function(){
     const selectElem = document.querySelectorAll('.show');
-    for (var i=0; i<selectElem.length; i++) {
+    for (var i=0; i < selectElem.length; i++) {
       enable();
       selectElem[i].classList.remove('show', 'open', 'disabled');
     }
@@ -140,15 +137,13 @@ const unmatched = () => {
 };
 
 function disable(){
-    Array.prototype.filter.call(allCardsGame, function(card){
+    Array.prototype.filter.call(allCardsGame, function(card) {
         card.classList.add('disabled');
     });
 }
 
 function enable(){
-    Array.prototype.filter.call(allCardsGame, function(card){
-        // card.classList.remove('disabled');
-        console.log(card);
+    Array.prototype.filter.call(allCardsGame, function(card) {
         for(var i = 0; i < matchCards.length; i++){
             console.log("matchcards", matchCards)
             document.getElementsByClassName("match")[i].classList.add("disabled");
