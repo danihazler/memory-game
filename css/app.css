@@ -39,7 +39,7 @@ h1 {
 
 #deck {
   width: 45%;
-  min-height: 600px; 
+  min-height: 600px;
   background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
   padding: 2%;
   border-radius: 10px;
@@ -53,7 +53,7 @@ h1 {
 
 #deck .card {
   transform: rotateY(0);
-  transition: transform 1s linear;
+  transition: transform .7s linear;
 
   height: 125px;
   width: 22%;
